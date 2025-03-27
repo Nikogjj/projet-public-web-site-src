@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Hello World</h1>
+    <p>Si je suis rouge c'est que le fichier style.css est bien servie par le serveur HTTP</p>
+    <ul>
+        <a href="admin/dashboard.html"><li>Dashboard admin CE LIEN DOIT MARCHER :)</li></a>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div class="all_products">
+        <h2>Voici tout vos produits</h2>
+        <template class="template_product">
+            <div class="product">
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </template>
+    </div>
+    <div class="create">
+        <h2>ajouter un produit</h2>
+        <form action="submit">
+            <input type="text" name="nom" placeholder="nom du produit">
+            <input type="text" name="taille" placeholder="taille du produit">
+            <input type="text" name="prix" placeholder="prix du produit">
+            <button type="submit">ajouter</button>
+        </form>
+    </div>
+    <div class="read">
+        <h2>obtenir un produit</h2>
+        <form action="submit">
+            <input type="text" name="nom" placeholder="nom du produit">
+            <input type="text" name="taille" placeholder="taille du produit">
+            <input type="text" name="prix" placeholder="prix du produit">
+            <button type="submit">obtenir</button>
+        </form>
+    </div>
+    <div class="update">
+        <h2>modifier un produit</h2>
+        <form action="submit">
+            <input type="text" name="nom" placeholder="nom du produit">
+            <input type="text" name="taille" placeholder="taille du produit">
+            <input type="text" name="prix" placeholder="prix du produit">
+            <button type="submit">modifier</button>
+        </form>
+    </div>
+    <div class="delete">
+        <h2>supprimer un produit</h2>
+        <form action="submit">
+            <input type="text" name="nom" placeholder="nom du produit">
+            <input type="text" name="taille" placeholder="taille du produit">
+            <input type="text" name="prix" placeholder="prix du produit">
+            <button type="submit">supprimer</button>
+        </form>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

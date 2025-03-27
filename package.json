@@ -1,0 +1,22 @@
+{
+  "name": "projet-public-web-site-src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHAOUCHI/projet-public-web-site-src.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CHAOUCHI/projet-public-web-site-src/issues"
+  },
+  "homepage": "https://github.com/CHAOUCHI/projet-public-web-site-src#readme",
+  "dependencies": {
+    "mime-types": "^2.1.35"
+  }
+}

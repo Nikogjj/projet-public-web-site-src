@@ -1,0 +1,9 @@
+body{
+    background-color: red;
+    color : white;
+}
+.product{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
