@@ -32,17 +32,41 @@ const server = http.createServer((request,response)=>{
         }
         if (["GET","POST"].indexOf(request.method> -1)) {
             response.appendHeader("Content-type",mime.lookup(path));
-            response.writeHead(200,headers);
+            if (path!="../public/read_product.json") {
+                response.writeHead(200,headers);
+            }
             console.log("GET/POST");
         }
         switch (path) {
+            case "../public/read_product.json":
+                request.addListener("data",async (data)=>
+                    {
+                    await ProductModel.readProduct(JSON.parse(data.toString()))
+                    .then(bdd_string=>{
+                        if (bdd_string=="Pas de resultat pour cette recherche") {
+                            console.log("oueoaizueoizaueoi")
+                            response.writeHead(400,headers);
+                        }
+                        else{
+                            response.writeHead(200,headers);
+                        }
+                        response.write(bdd_string)
+                    })
+                    .catch(error=>{
+                        // console.error(error)
+                        response.write("error");
+                    })
+                    .finally(()=>{
+                        response.end()
+                    })
+                })
+                break;
             case "../public/add_product.json":
                 request.addListener("data",async (data)=>{
-                    await ProductModel.createProduct(data)
+                    console.log("OKKKKKK : ",data.toString());
+                    await ProductModel.createProduct(JSON.parse(data.toString()))
                     .then(product=>{
-                        console.log("product : ",product);
                         const productJSON = JSON.stringify(product);
-                        console.log("productJSON : ",productJSON);
                         response.write(productJSON);
                     })
                     .catch((error)=>{
@@ -65,7 +89,6 @@ const server = http.createServer((request,response)=>{
                 response.end(body);
                 break;
             case "../public/script.js":
-                console.log("KDJSQLKDJSQLKDJQSLKDJSQLKDJSQ")
                 body = fs.readFileSync(path);
                 response.write(body);
                 response.end();
@@ -76,7 +99,6 @@ const server = http.createServer((request,response)=>{
                 response.end();
                 break;
             default:       
-                console.log("okkkkkkkkkkk")
                 response.statusCode=404;
                 response.end("error 404 not found")
                 break;

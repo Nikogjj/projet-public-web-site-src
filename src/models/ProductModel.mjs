@@ -1,24 +1,21 @@
 import fs from "fs/promises"
-import { json } from "stream/consumers";
 
 export class ProductModel{
     /**
      * 
-     * @param {{nom:string,taille:string,prix:string}} newProduct 
+     * @param {{nom:string,taille:string,prix:string,id:string}} newProduct 
      * @returns 
      */
-    static createProduct(newProduct){
+    static async createProduct(newProduct){
 
         return fs.readFile("models/products.json",{
-            encoding:"utf-8"
         })
         .then((productsJSON)=>{
-            console.log("productsJSON : ",productsJSON.json());
-            const products = JSON.parse(productsJSON);
-            products.push(newProduct);
-            const newProductsJSON = JSON.stringify(products);
-            console.log("newProductsJSON : ",newProductsJSON);
-            fs.writeFile("models/products.json",newProductsJSON);
+            const bdd = JSON.parse(productsJSON);
+            newProduct.id=bdd.length;
+            console.log(newProduct)
+            bdd.push(newProduct);
+            fs.writeFile("models/products.json",JSON.stringify(bdd));
             return newProduct;
         })
         .catch((error)=>{
@@ -28,4 +25,29 @@ export class ProductModel{
             return product;
         })
     }
+    /**
+     * 
+     * @param {{nom:string,taille:string,prix:string,id:string}} productToFind 
+     */
+    static async readProduct(productToFind) {
+
+        return fs.readFile("models/products.json")
+        .then(productsJSON=>{
+            let bdd = JSON.parse(productsJSON);
+            for (const key in productToFind) {
+                bdd = bdd.filter(product=>product[key]==productToFind[key]);
+            }
+            if (bdd.length==0) {
+                return "Pas de resultat pour cette recherche"
+            }
+            else{
+                return JSON.stringify(bdd);
+            }
+        })
+        .catch(error=>{
+            return error;
+        })
+        .finally(bdd_string=>bdd_string)
+    }
 }
+
